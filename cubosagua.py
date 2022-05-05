@@ -63,6 +63,7 @@ class juegoCubos:
         print('  (L)lenar un cubo')
         print('  (V)aciar un cubo')
         print('  (M)over el agua de un cubo a otro')
+        print('  (E)mpty todos los cubos')
         print('  (S)alir')
 
         while True:
@@ -71,7 +72,7 @@ class juegoCubos:
                 print('Gracias por jugar!')
                 sys.exit()
 
-            if move in ('L', 'V', 'M'):
+            if move in ('L', 'V', 'M', 'E'):
                 return move
 
     def selecCubo(self, mensaje):
@@ -90,6 +91,10 @@ class juegoCubos:
     def vaciarCubo(self, cuboOrigen):
         self.aguaEnCubos[cuboOrigen] = 0
         self.pasos += 1
+
+    def vaciartodosCubo(self):
+        for i in ('8', '5', '3'):
+            self.vaciarCubo(i)
 
     def moverCubo(self, cuboOrigen, cuboDestino):
         cuboDestinoTam = int(cuboDestino)
@@ -118,6 +123,9 @@ class juegoCubos:
                 cuboOrigen = self.selecCubo('Selecciona el cubo ORIGEN 8, 5, 3 o SALIR:')
                 cuboDestino = self.selecCubo('Selecciona el cubo DESTINO 8, 5, 3 o SALIR:')
                 self.moverCubo(cuboOrigen, cuboDestino)
+            elif opcion == "E":
+                self.vaciartodosCubo()
+
             self.mostrarEstadoCubos()
             self.checkObjetivo()
 
